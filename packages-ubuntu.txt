@@ -1,0 +1,66 @@
+; tmux conf
+; vimrc
+; dotfiles to ease stuff (Check Shrayas and other repositories)
+
+
+Changing Swappiness
+sudo sysctl vm.swappiness=20
+
+Common Lisp
+sudo apt-get install sbcl
+
+
+Scheme
+sudo apt-get install mit-scheme
+
+Haskell
+sudo apt-get install haskell-platform
+
+
+SDL
+sudo apt-get install libsdl2-dev
+sudo apt-get install libsdl2-image-dev
+
+
+
+NodeJS
+sudo apt-get install nodejs-legacy
+sudo apt-get install npm
+
+Go
+sudo apt-get install golang-go
+
+Python
+sudo apt-get install virtualenv
+sudo apt-get install python-pip
+
+Racket Lang
+
+Vim
+sudo apt-get install vim
+sudo apt-get install vim-gnome
+
+PHP
+sudo apt-get install php7.0
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+GUI Themes
+sudo apt-get install unity-tweak-tool
+sudo apt-add-repository ppa:numix/ppa; sudo apt-get install numix-icon-theme-circle;
+
+General Stuff
+sudo apt-get install tmux
+sudo apt-get install git git-cola
+sudo apt-get install supervisor
+sudo apt-get install aptitude
+sudo apt-get install htop 
+sudo apt-get install virtualbox
+sudo apt-get install xclip
+sudo apt-get install wine
+
+; For changing the keys to tile stuff easily on Ubuntu
+sudo apt-get install compizconfig-settings-manager
+; Visual Studio Code
+; Docker
+; Brave browser
+
