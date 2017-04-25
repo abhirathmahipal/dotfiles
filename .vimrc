@@ -1,8 +1,44 @@
+" Vi mode isn't required
+set nocompatible
+
+" Vundle plugin manager (works with Windows and Linux)
+" Chose this over Pathogen as it was a pain to reinstall stuff on git
+" subsystem on windows
+
+" vundle needs filtype plugins off
+" turn it on again later
+filetype plugin indent off
+syntax off
+
+" set the runtime path for vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Insert mode autocomplete
+Plugin 'ervandew/supertab'
+
+" Emmet only for PHP and HTML
+Plugin 'mattn/emmet-vim' " TODO load only HTML and PHP
+
+" Tree explorer. Load only when needed
+Plugin 'scrooloose/nerdtree' "TODO load only when required
+
+
+call vundle#end()
+" end of vundle related stuff
+
+" turning it on again
+" load filetype-specific indent files & file specific plugins
+filetype plugin indent on 
+syntax enable
+
 " Allow mouse
 set mouse=a
 
-" Vi mode isn't required
-set nocompatible
 
 " Allow 256 colours
 set t_Co=256
@@ -36,7 +72,6 @@ set softtabstop=4 " when backspace is pressed, remove four spaces if there was a
 
 " When a line is created, autoindent stuff
 set autoindent
-filetype indent on " load filetype-specific indent files
 
 " Show matching bracket
 set showmatch
@@ -48,8 +83,7 @@ set incsearch                               " Search as you type, incremental se
 set ignorecase                              " ignore case while searching
 
 
-" Syntax, line number and highlight current line
-syntax on
+" line number and highlight current line
 set number
 set cursorline
 highlight CursorLine cterm=bold ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
