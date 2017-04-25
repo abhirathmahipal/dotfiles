@@ -1,35 +1,32 @@
 " Vi mode isn't required
 set nocompatible
+filetype off
 
-" Vundle plugin manager (works with Windows and Linux)
-" Chose this over Pathogen as it was a pain to reinstall stuff on git
-" subsystem on windows
+" set the runtime path for so that it activates vim-plug
+" A common place for windows, Linux and git subsystem's vim on Windows
+set rtp+=~/.vim/autoloadvimplug
 
-" vundle needs filtype plugins off
-" turn it on again later
-filetype plugin indent off
-syntax off
-
-" set the runtime path for vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Insert mode autocomplete
-Plugin 'ervandew/supertab'
-
-" Emmet only for PHP and HTML
-Plugin 'mattn/emmet-vim' " TODO load only HTML and PHP
-
-" Tree explorer. Load only when needed
-Plugin 'scrooloose/nerdtree' "TODO load only when required
+" Install plugins using vim-plug
+call plug#begin('~/.vim/plugins')
 
 
-call vundle#end()
-" end of vundle related stuff
+" Use emmet only for HTML and PHP
+Plug 'mattn/emmet-vim',  { 'for': ['html', 'php'] }
+
+" Help with navigation
+Plug 'easymotion/vim-easymotion'
+
+" Tree explorer. Lazy load
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" Status bar
+Plug 'vim-airline/vim-airline'
+
+" Fuzzy search (like Sublime's file finder)
+Plug 'ctrlpvim/ctrlp.vim'
+
+call plug#end()
+" end of vim-plug related stuff
 
 " turning it on again
 " load filetype-specific indent files & file specific plugins
