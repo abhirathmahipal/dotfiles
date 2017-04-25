@@ -5,7 +5,13 @@ set mouse=a
 set nocompatible
 
 " Allow 256 colours
- set t_Co=256
+set t_Co=256
+
+" Title
+" TODO Change edited file status to * from +
+set title
+
+" Theme
 
 " Allow backspace everywhere and fix backspace issue
 set backspace=indent,eol,start
@@ -23,14 +29,32 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-" Highlight all occurrences of a search
- set hlsearch
+" Shift + Tab reverse tab TODO
+
+
+" When a line is created, autoindent stuff
+set autoindent
+
+" Show matching bracket
+set showmatch
+
+" search options
+" Read more about smart search if needed
+set hlsearch                                " Highlight all occurrences
+set incsearch                               " Search as you type, incremental search
+set ignorecase                              " ignore case while searching
+
 
 " Syntax, line number and highlight current line
 syntax on
 set number
 set cursorline
 highlight CursorLine cterm=bold ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+set ruler
+
+
+" Autocomplete for Vim commands
+set wildmenu
 
 " highlight column 81 to encourage shorter lines
 set colorcolumn=81
