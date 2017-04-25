@@ -28,12 +28,15 @@ set nowb
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4 " when backspace is pressed, remove four spaces if there was a tab
+
 
 " Shift + Tab reverse tab TODO
 
 
 " When a line is created, autoindent stuff
 set autoindent
+filetype indent on " load filetype-specific indent files
 
 " Show matching bracket
 set showmatch
