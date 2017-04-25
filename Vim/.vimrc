@@ -25,6 +25,10 @@ Plug 'vim-airline/vim-airline'
 " Fuzzy search (like Sublime's file finder)
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Some colorschemes
+Plug 'tomasr/molokai'
+Plug 'sjl/badwolf'
+
 call plug#end()
 " end of vim-plug related stuff
 
@@ -37,8 +41,9 @@ syntax enable
 set mouse=a
 
 
-" Allow 256 colours
+" Allow 256 colours and theme
 set t_Co=256
+colorscheme molokai
 
 " Title
 " TODO Change edited file status to * from +
@@ -80,8 +85,8 @@ set incsearch                               " Search as you type, incremental se
 set ignorecase                              " ignore case while searching
 
 
-" line number and highlight current line
-set number
+" relative line number and highlight current line
+set relativenumber " Thanks Shrayas :)
 set cursorline
 highlight CursorLine cterm=bold ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 set ruler
