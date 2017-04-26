@@ -26,8 +26,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Some colorschemes
-Plug 'tomasr/molokai'
 Plug 'sjl/badwolf'
+Plug 'dracula/vim'
+Plug 'vim-scripts/peaksea' " Taken from Ultimate vimrc by amix
 
 call plug#end()
 " end of vim-plug related stuff
@@ -43,13 +44,23 @@ set mouse=a
 
 " Allow 256 colours and theme
 set t_Co=256
-colorscheme molokai
+set background=dark
+colorscheme peaksea
+
+" Better styling for windows GUI
+if has ("gui_running")
+    if has("gui_win32")
+        set guifont=Consolas:h12:cANSI:qDRAFT
+        set guioptions-=m " Remove menubar
+        set guioptions-=T " Remove toolbar
+        colorscheme dracula
+    endif
+endif
 
 " Title
 " TODO Change edited file status to * from +
 set title
 
-" Theme
 
 " Allow backspace everywhere and fix backspace issue
 set backspace=indent,eol,start
@@ -86,7 +97,7 @@ set ignorecase                              " ignore case while searching
 
 
 " relative line number and highlight current line
-set relativenumber " Thanks Shrayas :)
+set number 
 set cursorline
 highlight CursorLine cterm=bold ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
 set ruler
