@@ -25,6 +25,9 @@ Plug 'vim-airline/vim-airline'
 " Fuzzy search (like Sublime's file finder)
 Plug 'ctrlpvim/ctrlp.vim'
 
+" git
+Plug 'tpope/vim-fugitive'
+
 " Some colorschemes
 Plug 'sjl/badwolf'
 Plug 'dracula/vim'
@@ -61,6 +64,8 @@ endif
 " TODO Change edited file status to * from +
 set title
 
+" Status bar is always displayed. Useful for gvim
+set laststatus=2
 
 " Allow backspace everywhere and fix backspace issue
 set backspace=indent,eol,start
@@ -90,11 +95,16 @@ set autoindent
 set showmatch
 
 " search options
-" Read more about smart search if needed
+" smartcase ignores case when all small, case sensitive when there is caps
+" Be careful about search. During replace, what is found by search is replaced
+set smartcase
 set hlsearch                                " Highlight all occurrences
 set incsearch                               " Search as you type, incremental search
 set ignorecase                              " ignore case while searching
 
+
+" Toggle search highlights, http://stackoverflow.com/a/4372764/5698202
+map <leader>h :set hlsearch!<cr>
 
 " relative line number and highlight current line
 set number 
