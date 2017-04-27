@@ -174,3 +174,16 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 noremap <silent> <c-k> :call <SID>swap_up()<CR>
 noremap <silent> <c-j> :call <SID>swap_down()<CR>
+
+" Ctrl + a is select all (Shrayas again)
+nnoremap <C-a> ggVG
+
+" Buffer switches
+" Shows the list of buffers and waits for your input
+" https://vi.stackexchange.com/questions/2129/fastest-way-to-switch-to-a-buffer-in-vim
+nnoremap <leader>b :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
+" Next Buffer
+nnoremap <leader>n :bnext<CR>
+" Last buffer edited
+nnoremap <leader>e :e#<CR>
+
