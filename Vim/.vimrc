@@ -22,7 +22,13 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Status bar
 Plug 'vim-airline/vim-airline'
 
+" Tabularise data
+Plug 'godlygeek/tabular'
+
 " Paranthesis completion
+" TODO search for a better plugin. auto-pairs has some issues
+" with curly braces in Windows or alternatively use if statments or something
+" and use different plugins for windows and linux
 Plug 'jiangmiao/auto-pairs'
 
 " Fuzzy search (like Sublime's file finder)
