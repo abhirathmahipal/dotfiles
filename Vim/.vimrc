@@ -22,6 +22,9 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Status bar
 Plug 'vim-airline/vim-airline'
 
+" Paranthesis completion
+Plug 'jiangmiao/auto-pairs'
+
 " Fuzzy search (like Sublime's file finder)
 Plug 'ctrlpvim/ctrlp.vim'
 
@@ -59,6 +62,9 @@ if has ("gui_running")
         colorscheme dracula
     endif
 endif
+
+" Avoid delays while switching between modes
+set timeoutlen=1000 ttimeoutlen=0  
 
 " Title
 " TODO Change edited file status to * from +
