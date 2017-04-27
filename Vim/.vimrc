@@ -65,6 +65,7 @@ endif
 set title
 
 " Status bar is always displayed. Useful for gvim
+" TODO set modified file indicator to * from +
 set laststatus=2
 
 " Allow backspace everywhere and fix backspace issue
@@ -83,10 +84,6 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4 " when backspace is pressed, remove four spaces if there was a tab
-
-
-" Shift + Tab reverse tab TODO
-
 
 " When a line is created, autoindent stuff
 set autoindent
@@ -187,3 +184,5 @@ nnoremap <leader>n :bnext<CR>
 " Last buffer edited
 nnoremap <leader>e :e#<CR>
 
+" Switch without saving buffers
+set hidden
