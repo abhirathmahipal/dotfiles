@@ -31,6 +31,12 @@ Plug 'godlygeek/tabular'
 " and use different plugins for windows and linux
 Plug 'jiangmiao/auto-pairs'
 
+" Autocomplete. Most other autocomplete plugins have some dependencies
+" (Python, lua etc). Have to customise the settings of this plugin
+" to show suggestions as I type and also not to choose a suggestion as soon as
+" I press tab hence avoiding the use of Ctrl + E to deselect the suggestion
+Plug 'ervandew/supertab'
+
 " Fuzzy search (like Sublime's file finder)
 Plug 'ctrlpvim/ctrlp.vim'
 
