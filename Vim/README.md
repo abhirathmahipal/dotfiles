@@ -48,3 +48,15 @@ I would map it to `! gcc % -o a.out`
 - :shell - opens up a shell where I can execute commands. I can use the shell as long
 as I want. If I want to return to vim just exit the shell. (exit command on Bash, 
 similar command of Windows and Gvim as well)
+
+#### Comments
+Using a plugin for this. Quite handy. Normally on Visual Studio code or Sublime I
+would just `ctrl + /`.
+- Comment
+- Sexy syntax
+- Comment undo
+- Multiline comments for the block selected
+
+#### Tabularise Data
+Using a plugin to easily beautify code. Specify the line numbers in the command or
+apply `:Tabularize` in Visual mode.

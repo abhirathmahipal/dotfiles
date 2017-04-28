@@ -19,6 +19,9 @@ Plug 'easymotion/vim-easymotion'
 " Tree explorer. Lazy load
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
+" Excellent plugin to comment stuff
+Plug 'scrooloose/nerdcommenter'
+
 " Status bar
 Plug 'vim-airline/vim-airline'
 
@@ -91,6 +94,10 @@ set backspace=indent,eol,start
 
 " Reload when file changes externally (useful after git stash)
 set autoread
+
+" NerdComments settings
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
 " No backups please
 set noswapfile
