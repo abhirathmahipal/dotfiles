@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugins')
 
 
 " Use emmet only for HTML and PHP
-Plug 'mattn/emmet-vim',  { 'for': ['html', 'php'] }
+Plug 'mattn/emmet-vim',  { 'for': ['html', 'php', 'htmldjango'] }
 
 " Help with navigation
 Plug 'easymotion/vim-easymotion'
