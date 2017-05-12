@@ -9,6 +9,9 @@ set rtp+=~/.vim/autoloadvimplug
 " Install plugins using vim-plug
 call plug#begin('~/.vim/plugins')
 
+" EJS files
+Plug 'nikvdp/ejs-syntax'
+
 
 " Use emmet only for HTML and PHP
 Plug 'mattn/emmet-vim',  { 'for': ['html', 'php', 'htmldjango', 'ejs'] }
