@@ -19,6 +19,9 @@ Some key bindings apart from what I commonly use
 ### Switching Tabs, Buffers, Windows etc
 
 #### Switch or open Buffers, Files etc
+- :vsp | b1 Open buffer 1 with a vertical split.
+- :vsp | bmatchingtext Open buffer where matchingtext is matched with the file name to be opened.
+
 #### Most Recent Buffer
 - Switch to most recent buffer <leader>e
 - Will be used a lot. Eg:- Copying parameters from model to controller and cross file
