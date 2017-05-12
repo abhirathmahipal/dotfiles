@@ -77,6 +77,7 @@ if has ("gui_running")
         set guifont=Consolas:h12:cANSI:qDRAFT
         set guioptions-=m " Remove menubar
         set guioptions-=T " Remove toolbar
+        set guioptions-=L " Remove scrollbars
         colorscheme dracula
     endif
 endif
