@@ -210,8 +210,28 @@ nnoremap <C-a> ggVG
 nnoremap <leader>b :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
 " Next Buffer
 nnoremap <leader>n :bnext<CR>
+" Prev Buffer
+nnoremap <leader>p :bprev<CR>
 " Last buffer edited
 nnoremap <leader>e :e#<CR>
 
 " Switch without saving buffers
 set hidden
+
+
+" Fugitive Specific Mapping (taken from Gokul)
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+
+
+" Airline related config
+let g:airline_theme='dark'
+" let g:airline_powerline_fonts = 1
+let g:airline_skip_empty_sections = 1
+
+" NERDTree settings
+
+" VS Code uses Ctrl + Shift + e so
+map <C-e> :NERDTreeToggle<CR>
