@@ -12,7 +12,8 @@ call plug#begin('~/.vim/plugins')
 " EJS files
 Plug 'nikvdp/ejs-syntax'
 
-
+" Surround cuz used to in VSCode
+Plug 'tpope/vim-surround'
 " Use emmet only for HTML and PHP
 Plug 'mattn/emmet-vim',  { 'for': ['html', 'php', 'htmldjango', 'ejs'] }
 
