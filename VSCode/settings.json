@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Monokai",
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.easymotion": true,
+    "vim.easymotionMarkerBackgroundColor": "#555555"
+}
