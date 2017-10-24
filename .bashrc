@@ -131,3 +131,10 @@ function sort_files_by_size_current_directory {
 function find_main_function {
     grep -r -- 'main[  ]*(\|int main\|__main__\|main\s* ='
 }
+
+
+## Vim global editor
+git config --global core.editor "vim"
+export GIT_EDITOR=vim
+export VISUAL=vim
+export EDITOR="$VISUAL"
