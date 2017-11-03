@@ -51,6 +51,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'sjl/badwolf'
 Plug 'dracula/vim'
 Plug 'vim-scripts/peaksea' " Taken from Ultimate vimrc by amix
+Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 " end of vim-plug related stuff
@@ -66,8 +67,15 @@ set mouse=a
 
 " Allow 256 colours and theme
 set t_Co=256
-set background=dark
-colorscheme peaksea
+set termguicolors
+
+" for peaksea
+" set background=dark
+" colorscheme peaksea
+
+" for ayucolor
+let ayucolor="mirage"
+colorscheme ayu
 
 " Better styling for windows GUI
 if has ("gui_running")
