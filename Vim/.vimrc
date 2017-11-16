@@ -52,6 +52,7 @@ Plug 'sjl/badwolf'
 Plug 'dracula/vim'
 Plug 'vim-scripts/peaksea' " Taken from Ultimate vimrc by amix
 Plug 'ayu-theme/ayu-vim'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 " end of vim-plug related stuff
@@ -75,7 +76,10 @@ set termguicolors
 
 " for ayucolor
 let ayucolor="mirage"
-colorscheme ayu
+" colorscheme ayu
+
+" for base 16 colourscheme
+colorscheme base16-default-dark
 
 " Better styling for windows GUI
 if has ("gui_running")
