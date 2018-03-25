@@ -69,6 +69,7 @@ set mouse=a
 " Allow 256 colours and theme
 set t_Co=256
 set termguicolors
+set term=xterm-256color
 
 " for peaksea
 " set background=dark
