@@ -141,3 +141,8 @@ git config --global core.editor "vim"
 export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+## Go
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
