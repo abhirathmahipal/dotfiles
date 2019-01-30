@@ -1,15 +1,24 @@
 {
-    "workbench.colorTheme": "Monokai",
-    "editor.minimap.enabled": false,
-    "editor.wordWrap": "on",
-    "workbench.editor.enablePreview": false,
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-    "vim.disableAnnoyingNeovimMessage": true,
-    "vim.easymotion": true,
-    "vim.easymotionMarkerBackgroundColor": "#555555",
-    "javascript.format.enable": true,
-    "prettier.eslintIntegration": true,
-    "editor.formatOnSave": true,
-    "go.toolsGopath": "/home/abhirath/.vscode/gotools"
-}
+  "workbench.colorTheme": "Monokai",
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "vim.disableAnnoyingNeovimMessage": true,
+  "vim.easymotion": true,
+  "vim.easymotionMarkerBackgroundColor": "#555555",
+  "javascript.format.enable": true,
+  "prettier.eslintIntegration": true,
+  "editor.formatOnSave": true,
+  "go.toolsGopath": "/home/abhirath/.vscode/gotools",
+  "go.inferGopath": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/env/bin/*": true,
+    "**/env/include/*": true,
+    "**/env/lib/*": true
 
+  }
+}

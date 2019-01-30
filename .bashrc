@@ -146,3 +146,6 @@ export EDITOR="$VISUAL"
 export GOROOT=/usr/local/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
+## direnv
+eval "$(direnv hook bash)"
+
