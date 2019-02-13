@@ -136,6 +136,11 @@ function find_main_function {
 alias +x='chmod +x'
 alias ..='cd ..'
 
+# git
+alias g="git"
+source /usr/share/bash-completion/completions/git
+__git_complete g __git_main
+
 ## Vim global editor
 git config --global core.editor "vim"
 export GIT_EDITOR=vim
@@ -144,6 +149,7 @@ export EDITOR="$VISUAL"
 
 ## Go
 export GOROOT=/usr/local/go
+export GOPATH=/home/abhirath/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 ## direnv
