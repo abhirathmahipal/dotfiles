@@ -9,9 +9,9 @@
   "vim.easymotionMarkerBackgroundColor": "#555555",
   "javascript.format.enable": true,
   "prettier.eslintIntegration": true,
-  "editor.formatOnSave": true,
   "go.toolsGopath": "/home/abhirath/.vscode/gotools",
   "go.inferGopath": true,
+  "go.autocompleteUnimportedPackages": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
@@ -19,6 +19,9 @@
     "**/env/bin/*": true,
     "**/env/include/*": true,
     "**/env/lib/*": true
-
-  }
+  },
+  "window.zoomLevel": 0,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.formatOnSave": true
 }
+
