@@ -132,6 +132,20 @@ function find_main_function {
     grep -r -- 'main[  ]*(\|int main\|__main__\|main\s* ='
 }
 
+## Activating Python Environment 
+function py_activate {
+    if [ -d "./env" ]
+    then
+        source env/bin/activate
+    elif [ -d "./venv" ]
+    then
+        source env/bin/activate
+    else
+        echo "Could not find env and venv folders"
+    fi
+}
+
+
 ## Alias
 alias +x='chmod +x'
 alias ..='cd ..'
@@ -154,4 +168,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 ## direnv
 eval "$(direnv hook bash)"
+
+# to fix i3 and gnome-control-center issue
+alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
 
