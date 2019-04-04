@@ -128,6 +128,11 @@ function sort_files_by_size_current_directory {
     ls -lShr
 }
 
+function sort_folder_by_size_current_directory {
+    du -chd 1 | sort -h
+
+}
+
 function find_main_function {
     grep -r -- 'main[  ]*(\|int main\|__main__\|main\s* ='
 }
@@ -146,6 +151,7 @@ function py_activate {
 }
 
 
+PATH="$HOME/bin:$PATH"
 ## Alias
 alias +x='chmod +x'
 alias ..='cd ..'
@@ -169,6 +175,5 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 ## direnv
 eval "$(direnv hook bash)"
 
-# to fix i3 and gnome-control-center issue
+## fix for i3 and gnome-settings being blank
 alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
-
