@@ -183,15 +183,18 @@ eval "$(direnv hook bash)"
 alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
 
 # taken from https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?ch=10&share=be33bcbf&srid=zk30
-weather(){ curl -s "wttr.in/$1?m1"}
 
-function timer() {
+function weather { 
+    curl -s "wttr.in/$1?m1"
+}
+
+function timer {
   total=$1
   for ((i=total; i>0; i--)); do sleep 1; printf "Time remaining $i secs \r"; done
   echo -e "\a"
 }
 
-function up() {
+function up {
   times=$1
   while [ "$times" -gt "0" ]; do
     cd ..
@@ -199,7 +202,7 @@ function up() {
   done
 }
 
-function extract () {
+function extract  {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xvjf $1    ;;
@@ -220,4 +223,3 @@ function extract () {
     echo "'$1' is not a valid file!"
   fi
 }
-
