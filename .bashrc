@@ -194,6 +194,11 @@ function timer {
   echo -e "\a"
 }
 
+function video_duration_total {
+    # https://askubuntu.com/a/600317/601073
+    find $1 -type f -exec mediainfo --Inform="General;%Duration%" "{}" \; 2>/dev/null | awk '{s+=$1/1000} END {h=s/3600; s=s%3600; printf "%.2d:%.2d\n", int(h), int(s/60)}'
+}
+
 function up {
   times=$1
   while [ "$times" -gt "0" ]; do
