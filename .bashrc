@@ -18,8 +18,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=20000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -150,6 +150,12 @@ function py_activate {
     fi
 }
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 
 PATH="$HOME/bin:$PATH"
 ## Alias
@@ -171,7 +177,7 @@ export EDITOR="$VISUAL"
 export GOROOT=/usr/local/go
 
 # go modules PATH not required
-#export GOPATH=/home/abhirath/go
+export GOPATH=/home/abhirath/go
 
 #export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$GOROOT/bin:$PATH
@@ -194,8 +200,7 @@ function timer {
   echo -e "\a"
 }
 
-function video_duration_total {
-    # https://askubuntu.com/a/600317/601073
+function video_duration {
     find $1 -type f -exec mediainfo --Inform="General;%Duration%" "{}" \; 2>/dev/null | awk '{s+=$1/1000} END {h=s/3600; s=s%3600; printf "%.2d:%.2d\n", int(h), int(s/60)}'
 }
 
@@ -228,3 +233,4 @@ function extract  {
     echo "'$1' is not a valid file!"
   fi
 }
+

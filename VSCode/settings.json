@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Monokai",
   "editor.minimap.enabled": false,
   "editor.wordWrap": "on",
   "workbench.editor.enablePreview": false,
@@ -7,22 +6,38 @@
   "vim.disableAnnoyingNeovimMessage": true,
   "vim.easymotion": true,
   "vim.easymotionMarkerBackgroundColor": "#555555",
-  "javascript.format.enable": true,
-  "prettier.eslintIntegration": true,
   "go.toolsGopath": "/home/abhirath/.vscode/gotools",
   "go.inferGopath": true,
   "go.autocompleteUnimportedPackages": true,
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/env/bin/*": true,
-    "**/env/include/*": true,
-    "**/env/lib/*": true
+    "*/.git/objects/*": true,
+    "*/.git/subtree-cache/*": true,
+    "*/node_modules/*": true,
+    "*/env/bin/": true,
+    "*/env/include/": true,
+    "*/env/lib/": true
   },
-  "window.zoomLevel": 0,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.formatOnSave": true,
   "editor.parameterHints.cycle": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+  "terminal.integrated.rendererType": "dom",
+  "go.useLanguageServer": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "javascript.format.enable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.formatting.provider": "black",
+
+  "python.formatting.blackArgs": [
+    "--target-version",
+    "py38"
+  ],
+  "python.pythonPath": "~/.pyenv/versions/3.8.3/envs/lt-resource/bin/python",
+  "go.formatTool": "gofmt",
+  "python.languageServer": "Pylance",
 }
+
