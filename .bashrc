@@ -150,6 +150,9 @@ function py_activate {
     fi
 }
 
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
@@ -233,4 +236,3 @@ function extract  {
     echo "'$1' is not a valid file!"
   fi
 }
-
