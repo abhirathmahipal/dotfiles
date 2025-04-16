@@ -176,14 +176,6 @@ export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-## Go
-export GOROOT=/usr/local/go
-
-# go modules PATH not required
-export GOPATH=/home/abhirath/go
-
-#export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-export PATH=$GOROOT/bin:$PATH
 
 ## direnv
 eval "$(direnv hook bash)"
