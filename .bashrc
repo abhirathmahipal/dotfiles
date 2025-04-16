@@ -150,17 +150,14 @@ function py_activate {
     fi
 }
 
-
+# Set up Python, Poetry, and pyenv
 export PATH="$HOME/.poetry/bin:$PATH"
-
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
 
 PATH="$HOME/bin:$PATH"
+
 ## Alias
 alias +x='chmod +x'
 alias ..='cd ..'
