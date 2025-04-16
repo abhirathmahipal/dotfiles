@@ -150,6 +150,10 @@ function py_activate {
     fi
 }
 
+# brew
+export PATH=/opt/homebrew/bin:$PATH
+
+
 # Set up Python, Poetry, and pyenv
 export PATH="$HOME/.poetry/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
