@@ -38,8 +38,8 @@ Plug 'godlygeek/tabular'
 " and use different plugins for windows and linux
 Plug 'jiangmiao/auto-pairs'
 
-" Autocomplete
-Plug 'Valloric/YouCompleteMe'
+" Autocomplete - requires vim compiled with Python 3.12+; uncomment if available
+" Plug 'Valloric/YouCompleteMe'
 
 " Fuzzy search (like Sublime's file finder)
 Plug 'ctrlpvim/ctrlp.vim'
