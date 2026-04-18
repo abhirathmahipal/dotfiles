@@ -1,0 +1,132 @@
+# Shared shell configuration — sourced by both .bashrc and .zshrc
+
+# brew
+export PATH=/opt/homebrew/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Set up Python, Poetry, and pyenv
+export PATH="$HOME/.poetry/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
+# pyenv (auto-detect shell)
+if command -v pyenv > /dev/null; then
+    if [ -n "$ZSH_VERSION" ]; then
+        eval "$(pyenv init - zsh)"
+    else
+        eval "$(pyenv init - bash)"
+    fi
+fi
+
+## Vim global editor
+export GIT_EDITOR=vim
+export VISUAL=vim
+export EDITOR="$VISUAL"
+git config --global core.editor "vim"
+
+## direnv
+if command -v direnv > /dev/null; then
+    if [ -n "$ZSH_VERSION" ]; then
+        eval "$(direnv hook zsh)"
+    else
+        eval "$(direnv hook bash)"
+    fi
+fi
+
+# ls colors: macOS uses -G, Linux uses --color=auto
+if ls --color=auto /dev/null >/dev/null 2>&1; then
+    alias ls='ls --color=auto'
+else
+    alias ls='ls -G'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+## Alias
+alias cx='chmod +x'
+alias ..='cd ..'
+
+# git
+alias g="git"
+alias grep='grep --color=auto'
+
+############################## Functions #######################################
+
+function most_active_files_git {
+    # https://stackoverflow.com/a/7686616/5698202
+    git log --pretty=format: --name-only | sort | uniq -c | sort -rg
+}
+
+function sort_files_by_size_current_directory {
+    ls -lShr
+}
+
+function sort_folder_by_size_current_directory {
+    du -chd 1 | sort -h
+}
+
+function find_main_function {
+    grep -r -- 'main[  ]*(\|int main\|__main__\|main\s* ='
+}
+
+## Activating Python Environment
+function py_activate {
+    if [ -d "./env" ]; then
+        source env/bin/activate
+    elif [ -d "./venv" ]; then
+        source venv/bin/activate
+    else
+        echo "Could not find env or venv folders"
+    fi
+}
+
+# taken from https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?ch=10&share=be33bcbf&srid=zk30
+
+function weather {
+    curl -s "wttr.in/$1?m1"
+}
+
+function timer {
+    total=$1
+    for ((i=total; i>0; i--)); do sleep 1; printf "Time remaining $i secs \r"; done
+    printf "\a\n"
+}
+
+function video_duration {
+    find $1 -type f -exec mediainfo --Inform="General;%Duration%" "{}" \; 2>/dev/null \
+        | awk '{s+=$1/1000} END {h=s/3600; s=s%3600; printf "%.2d:%.2d\n", int(h), int(s/60)}'
+}
+
+function up {
+    times=$1
+    while [ "$times" -gt "0" ]; do
+        cd ..
+        times=$(($times - 1))
+    done
+}
+
+function extract {
+    if [ -f "$1" ]; then
+        case $1 in
+            *.tar.bz2)   tar xvjf "$1"  ;;
+            *.tar.gz)    tar xvzf "$1"  ;;
+            *.tar.xz)    tar Jxvf "$1"  ;;
+            *.bz2)       bunzip2 "$1"   ;;
+            *.rar)       rar x "$1"     ;;
+            *.gz)        gunzip "$1"    ;;
+            *.tar)       tar xvf "$1"   ;;
+            *.tbz2)      tar xvjf "$1"  ;;
+            *.tgz)       tar xvzf "$1"  ;;
+            *.zip)       unzip -d "$(echo "$1" | sed 's/\(.*\)\.zip/\1/')" "$1" ;;
+            *.Z)         uncompress "$1" ;;
+            *.7z)        7z x "$1"      ;;
+            *)           echo "don't know how to extract '$1'" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}

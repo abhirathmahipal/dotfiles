@@ -18,7 +18,6 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=20000
 HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
@@ -77,22 +76,12 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -118,114 +107,21 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# fix for i3 and gnome-settings being blank
+alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
+
+# Git tab-completion for the 'g' alias (Linux bash only)
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+    __git_complete g __git_main
+fi
+
 ############################## My Stuff ########################################
-function most_active_files_git {
-     # https://stackoverflow.com/a/7686616/5698202
-     git log --pretty=format: --name-only | sort | uniq -c | sort -rg
-}
-
-function sort_files_by_size_current_directory {
-    ls -lShr
-}
-
-function sort_folder_by_size_current_directory {
-    du -chd 1 | sort -h
-
-}
-
-function find_main_function {
-    grep -r -- 'main[  ]*(\|int main\|__main__\|main\s* ='
-}
-
-## Activating Python Environment 
-function py_activate {
-    if [ -d "./env" ]
-    then
-        source env/bin/activate
-    elif [ -d "./venv" ]
-    then
-        source env/bin/activate
-    else
-        echo "Could not find env and venv folders"
-    fi
-}
-
-# brew
-export PATH=/opt/homebrew/bin:$PATH
-
-
-# Set up Python, Poetry, and pyenv
-export PATH="$HOME/.poetry/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
-
-PATH="$HOME/bin:$PATH"
 
 ## Alias
 alias +x='chmod +x'
-alias ..='cd ..'
 
-# git
-alias g="git"
-source /usr/share/bash-completion/completions/git
-__git_complete g __git_main
-
-## Vim global editor
-git config --global core.editor "vim"
-export GIT_EDITOR=vim
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-
-## direnv
-eval "$(direnv hook bash)"
-
-## fix for i3 and gnome-settings being blank
-alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
-
-# taken from https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?ch=10&share=be33bcbf&srid=zk30
-
-function weather { 
-    curl -s "wttr.in/$1?m1"
-}
-
-function timer {
-  total=$1
-  for ((i=total; i>0; i--)); do sleep 1; printf "Time remaining $i secs \r"; done
-  echo -e "\a"
-}
-
-function video_duration {
-    find $1 -type f -exec mediainfo --Inform="General;%Duration%" "{}" \; 2>/dev/null | awk '{s+=$1/1000} END {h=s/3600; s=s%3600; printf "%.2d:%.2d\n", int(h), int(s/60)}'
-}
-
-function up {
-  times=$1
-  while [ "$times" -gt "0" ]; do
-    cd ..
-    times=$(($times - 1))
-  done
-}
-
-function extract  {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xvjf $1    ;;
-      *.tar.gz)    tar xvzf $1    ;;
-      *.tar.xz)    tar Jxvf $1    ;;
-      *.bz2)       bunzip2 $1     ;;
-      *.rar)       rar x $1       ;;
-      *.gz)        gunzip $1      ;;
-      *.tar)       tar xvf $1     ;;
-      *.tbz2)      tar xvjf $1    ;;
-      *.tgz)       tar xvzf $1    ;;
-      *.zip)       unzip -d `echo $1 | sed 's/\(.*\)\.zip/\1/'` $1;;
-      *.Z)         uncompress $1  ;;
-      *.7z)        7z x $1        ;;
-      *)           echo "don't know how to extract '$1'" ;;
-    esac
-  else
-    echo "'$1' is not a valid file!"
-  fi
-}
+# Load shared config (aliases, functions, PATH, editor, pyenv, direnv, …)
+if [ -f ~/.shell_common ]; then
+    . ~/.shell_common
+fi
