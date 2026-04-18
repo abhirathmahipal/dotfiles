@@ -1,0 +1,7 @@
+[formulae]
+pyenv
+
+[casks]
+alt-tab
+visual-studio-code
+ghostty
