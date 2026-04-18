@@ -1,5 +1,6 @@
 [formulae]
 pyenv
+direnv
 
 [casks]
 alt-tab
