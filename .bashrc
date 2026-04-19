@@ -118,6 +118,14 @@ fi
 
 ############################## My Stuff ########################################
 
+# ls colors: macOS uses -G, Linux uses --color=auto
+if ls --color=auto /dev/null >/dev/null 2>&1; then
+    alias ls='ls --color=auto'
+else
+    alias ls='ls -G'
+fi
+
+
 ## Alias
 alias +x='chmod +x'
 
