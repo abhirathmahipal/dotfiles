@@ -1,7 +1,7 @@
 # Shared shell configuration — sourced by both .bashrc and .zshrc
 
 # brew
-export PATH=/opt/homebrew/bin:$PATH
+eval "$(brew shellenv)"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Set up Python, Poetry, and pyenv
