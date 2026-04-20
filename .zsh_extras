@@ -1,70 +1,33 @@
 # ~/.zsh_extras — autocomplete, reverse search, and prompt theme
 
-# ── Autocomplete ──────────────────────────────────────────────────────────────
-autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+48) ]]; then
-    compinit
-else
-    compinit -C
-fi
-
-zstyle ':completion:*' menu select                        # arrow-key menu
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"  # colored entries
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'      # case-insensitive
-zstyle ':completion:*' group-name ''                      # group by category
-zstyle ':completion:*:descriptions' format '%F{yellow}── %d ──%f'
-zstyle ':completion:*:warnings' format '%F{red}no matches%f'
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-
-setopt AUTO_MENU          # show menu on second tab
-setopt COMPLETE_IN_WORD   # complete from cursor position
-setopt ALWAYS_TO_END      # move cursor to end after completion
-
-# ── History ───────────────────────────────────────────────────────────────────
-HISTSIZE=50000
-SAVEHIST=50000
-HISTFILE=~/.zsh_history
-
-setopt HIST_IGNORE_DUPS       # skip duplicate consecutive entries
-setopt HIST_IGNORE_SPACE      # skip entries starting with a space
-setopt HIST_VERIFY            # confirm before executing from history
-setopt SHARE_HISTORY          # share history across sessions
-setopt INC_APPEND_HISTORY     # write immediately, not on exit
-
-# ── Reverse Search ────────────────────────────────────────────────────────────
-# fzf-powered reverse search when fzf is available, otherwise zsh built-in
-if command -v fzf > /dev/null; then
-    FZF_PREFIX="${HOMEBREW_PREFIX}/opt/fzf/shell"
-    [[ -f "$FZF_PREFIX/key-bindings.zsh"  ]] && source "$FZF_PREFIX/key-bindings.zsh"
-    [[ -f "$FZF_PREFIX/completion.zsh"    ]] && source "$FZF_PREFIX/completion.zsh"
-
-    export FZF_DEFAULT_OPTS="
-        --color=bg+:#1e2a3a,bg:#0d1117,spinner:#58a6ff,hl:#58a6ff
-        --color=fg:#c9d1d9,header:#58a6ff,info:#3fb950,pointer:#58a6ff
-        --color=marker:#3fb950,fg+:#e6edf3,prompt:#58a6ff,hl+:#58a6ff
-        --height=40% --layout=reverse --border=rounded
-        --bind 'ctrl-/:toggle-preview'
-    "
-    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=down:3:wrap"
-else
-    # built-in history substring search via up/down arrows
-    autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-    zle -N up-line-or-beginning-search
-    zle -N down-line-or-beginning-search
-    bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
-    bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
+# ── fzf ───────────────────────────────────────────────────────────────────────
+export FZF_DEFAULT_OPTS="
+    --color=bg+:#1e2a3a,bg:#0d1117,spinner:#58a6ff,hl:#58a6ff
+    --color=fg:#c9d1d9,header:#58a6ff,info:#3fb950,pointer:#58a6ff
+    --color=marker:#3fb950,fg+:#e6edf3,prompt:#58a6ff,hl+:#58a6ff
+    --height=40% --layout=reverse --border=rounded
+    --bind 'ctrl-/:toggle-preview'
+"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=down:3:wrap"
 
 # ── Prompt Theme (dark, no framework) ────────────────────────────────────────
-autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
-
 zstyle ':vcs_info:git:*' formats       ' %F{#f0883e}(%b)%f'
 zstyle ':vcs_info:git:*' actionformats ' %F{#f85149}(%b|%a)%f'
 
-add-zsh-hook precmd vcs_info
+typeset -g _vcs_msg=""
 
-setopt PROMPT_SUBST
+# Read result written by background job, then redraw prompt
+TRAPUSR1() {
+    local tmp="${TMPDIR:-/tmp}/.zvcs_$$"
+    [[ -f $tmp ]] && { _vcs_msg=$(<"$tmp"); rm -f "$tmp" }
+    zle && zle reset-prompt
+}
+
+_vcs_async_precmd() {
+    { vcs_info; print -rn "$vcs_info_msg_0_" >! "${TMPDIR:-/tmp}/.zvcs_$$"; kill -USR1 $$ } &!
+}
+
+add-zsh-hook precmd _vcs_async_precmd
 
 # Colors
 _p_user='%F{#3fb950}%n%f'          # green   — username
@@ -73,7 +36,7 @@ _p_dir='%F{#79c0ff}%~%f'           # lt-blue — current path
 _p_status='%(?.%F{#3fb950}❯%f.%F{#f85149}❯%f)'  # green/red chevron
 
 PROMPT='
-%F{#30363d}┌─[%f${_p_user}%F{#30363d}@%f${_p_host}%F{#30363d}]%f ${_p_dir}${vcs_info_msg_0_}
+%F{#30363d}┌─[%f${_p_user}%F{#30363d}@%f${_p_host}%F{#30363d}]%f ${_p_dir}${_vcs_msg}
 %F{#30363d}└─%f${_p_status} '
 
 RPROMPT='%F{#8b949e}%D{%H:%M}%f'   # grey clock on the right
