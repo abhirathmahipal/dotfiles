@@ -1,6 +1,7 @@
 [formulae]
 pyenv
 direnv
+htop
 
 [casks]
 alt-tab
