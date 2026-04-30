@@ -11,6 +11,7 @@ export FZF_DEFAULT_OPTS="
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=down:3:wrap"
 
 # ── Prompt Theme (dark, no framework) ────────────────────────────────────────
+autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats       ' %F{#f0883e}(%b)%f'
 zstyle ':vcs_info:git:*' actionformats ' %F{#f85149}(%b|%a)%f'
 
