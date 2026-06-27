@@ -6,6 +6,9 @@ DOTFILES_VIM="$(cd "$(dirname "$0")/Vim" && pwd)"
 echo "==> Copying .vimrc..."
 cp "$DOTFILES_VIM/.vimrc" "$HOME/.vimrc"
 
+echo "==> Setting vim as git's editor..."
+git config --global core.editor "vim"
+
 echo "==> Downloading latest vim-plug..."
 mkdir -p "$HOME/.vim/autoloadvimplug/autoload"
 curl -fLo "$HOME/.vim/autoloadvimplug/autoload/plug.vim" \

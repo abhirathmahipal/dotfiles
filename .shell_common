@@ -10,20 +10,28 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
-# pyenv (auto-detect shell)
+# pyenv — lazy-loaded. `eval "$(pyenv init -)"` costs ~220ms per shell; its only
+# job beyond PATH is the `pyenv` shell function + rehash hook. Put the shims on
+# PATH directly so python/pip/etc. resolve instantly (and per-directory
+# .python-version still works, since the shims read it at runtime), and run the
+# full init lazily the first time `pyenv` itself is called.
 if command -v pyenv > /dev/null; then
-    if [ -n "$ZSH_VERSION" ]; then
-        eval "$(pyenv init - zsh)"
-    else
-        eval "$(pyenv init - bash)"
-    fi
+    export PATH="$PYENV_ROOT/shims:$PATH"
+    pyenv() {
+        unset -f pyenv
+        if [ -n "$ZSH_VERSION" ]; then
+            eval "$(command pyenv init - zsh)"
+        else
+            eval "$(command pyenv init - bash)"
+        fi
+        pyenv "$@"
+    }
 fi
 
 ## Vim global editor
 export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
-git config --global core.editor "vim"
 
 ## direnv
 if command -v direnv > /dev/null; then
@@ -32,6 +40,24 @@ if command -v direnv > /dev/null; then
     else
         eval "$(direnv hook bash)"
     fi
+fi
+
+## nvm — lazy-loaded (sourcing nvm.sh costs ~0.5s on every shell start).
+# Define lightweight shims for nvm/node/npm/npx; the first time any of them is
+# called, the real nvm is sourced, the shims remove themselves, and the command
+# re-runs for real. If nvm isn't installed, no shims are defined and these
+# commands fall through to any system/brew versions already on PATH.
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    _load_nvm() {
+        unset -f nvm node npm npx 2>/dev/null
+        \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    }
+    for _cmd in nvm node npm npx; do
+        eval "${_cmd}() { _load_nvm; ${_cmd} \"\$@\"; }"
+    done
+    unset _cmd
 fi
 
 # some more ls aliases

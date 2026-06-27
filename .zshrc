@@ -72,6 +72,11 @@ ZSH_THEME=""
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git fzf)
 
+# Let oh-my-zsh manage compinit, but skip the compaudit security scan (this is
+# a personal machine). That avoids the slowest part of completion init without
+# adding a redundant second compinit call.
+ZSH_DISABLE_COMPFIX=true
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
