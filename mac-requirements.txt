@@ -8,3 +8,5 @@ alt-tab
 visual-studio-code
 ghostty
 nikitabobko/tap/aerospace
+raycast
+obsidian
