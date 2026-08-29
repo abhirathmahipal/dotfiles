@@ -16,11 +16,13 @@ zstyle ':vcs_info:git:*' formats       ' %F{#f0883e}(%b)%f'
 zstyle ':vcs_info:git:*' actionformats ' %F{#f85149}(%b|%a)%f'
 
 typeset -g _vcs_msg=""
+typeset -g _p_fill=""
 
 # Read result written by background job, then redraw prompt
 TRAPUSR1() {
     local tmp="${TMPDIR:-/tmp}/.zvcs_$$"
     [[ -f $tmp ]] && { _vcs_msg=$(<"$tmp"); rm -f "$tmp" }
+    _p_build_top
     zle && zle reset-prompt
 }
 
@@ -35,9 +37,26 @@ _p_user='%F{#3fb950}%n%f'          # green   — username
 _p_host='%F{#58a6ff}%m%f'          # blue    — hostname
 _p_dir='%F{#79c0ff}%~%f'           # lt-blue — current path
 _p_status='%(?.%F{#3fb950}❯%f.%F{#f85149}❯%f)'  # green/red chevron
+_p_time='%F{#8b949e}%D{%H:%M}%f'   # grey clock
+
+# Pin the clock to the right edge of the first line: pad with spaces to fill the
+# gap after user/host/path/branch (color codes don't count toward width). Redone
+# on every redraw — new command, git info, or resize. It lives on line one, so
+# copying a command never drags the time along with it.
+_p_build_top() {
+    setopt localoptions extendedglob
+    local user="${(%):-%n}" host="${(%):-%m}" dir="${(%):-%~}"
+    local vcs_plain="${(%)_vcs_msg}"
+    vcs_plain="${vcs_plain//$'\e'\[[0-9;]#m/}"
+    local fmt='%D{%H:%M}' ; local clock="${(%)fmt}"
+    local left="┌─[${user}@${host}] ${dir}${vcs_plain}"
+    local -i pad=$(( COLUMNS - ${#left} - ${#clock} - 1 ))  # -1: right margin
+    (( pad < 1 )) && pad=1
+    local sp="" ; _p_fill="${(l:pad:: :)sp}"
+}
+add-zsh-hook precmd _p_build_top
+TRAPWINCH() { _p_build_top; zle && zle reset-prompt }
 
 PROMPT='
-%F{#30363d}┌─[%f${_p_user}%F{#30363d}@%f${_p_host}%F{#30363d}]%f ${_p_dir}${_vcs_msg}
+%F{#30363d}┌─[%f${_p_user}%F{#30363d}@%f${_p_host}%F{#30363d}]%f ${_p_dir}${_vcs_msg}${_p_fill}${_p_time}
 %F{#30363d}└─%f${_p_status} '
-
-RPROMPT='%F{#8b949e}%D{%H:%M}%f'   # grey clock on the right
