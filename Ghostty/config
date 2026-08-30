@@ -1,1 +1,5 @@
 theme = Cobalt2
+
+# Override the Cobalt2 navy background with a near-black that keeps a faint
+# blue tint, so it stays consistent with the prompt's blue/green/orange accents.
+background = #010409
