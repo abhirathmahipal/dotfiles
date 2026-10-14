@@ -10,6 +10,19 @@ export FZF_DEFAULT_OPTS="
 "
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window=down:3:wrap"
 
+# ── History: one global file ─────────────────────────────────────────────────
+# Orca (the terminal app) switches HISTFILE to a per-worktree file in a precmd
+# hook that runs before this one. Switch it back on every prompt so Ctrl-R
+# searches ~/.zsh_history. zsh loads that file at startup, before Orca's hook
+# runs, so it doesn't need to be read again.
+_global_histfile="$HOME/.zsh_history"
+_pin_global_histfile() {
+    [[ $HISTFILE == $_global_histfile ]] && return
+    HISTFILE=$_global_histfile
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _pin_global_histfile
+
 # ── Prompt Theme (dark, no framework) ────────────────────────────────────────
 autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats       ' %F{#f0883e}(%b)%f'
